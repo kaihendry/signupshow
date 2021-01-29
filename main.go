@@ -91,11 +91,17 @@ func (server *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 
 	server.views.ExecuteTemplate(w, "index.html", struct {
-		Date  string
-		Names []string
+		Date      string
+		DayOfWeek string
+		Yesterday string
+		Tomorrow  string
+		Names     []string
 	}{
-		Date:  d,
-		Names: b,
+		Date:      d,
+		DayOfWeek: date.Weekday().String(),
+		Yesterday: date.AddDate(0, 0, -1).Format("2006-01-02"),
+		Tomorrow:  date.AddDate(0, 0, 1).Format("2006-01-02"),
+		Names:     b,
 	})
 
 }

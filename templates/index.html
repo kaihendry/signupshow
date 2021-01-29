@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <link rel="stylesheet" href="https://newcss.net/lite.css">
-<title>Office roster lookup</title>
+<title>{{ .DayOfWeek }} office roster lookup</title>
 <style>#app { column-count: 3; }</style>
 </head>
 <body>
@@ -15,6 +15,20 @@
 </p>
 <input type="submit">
 </form>
+
+<form>
+<input type="hidden" name="date" value="{{ .Yesterday }}">
+<input value="Yesterday" type="submit">
+</form>
+
+<form>
+<input type="hidden" name="date" value="{{ .Tomorrow }}">
+<input value="Tomorrow" type="submit">
+</form>
+
+
+
+
 
 <ol>
 {{- range .Names -}}
