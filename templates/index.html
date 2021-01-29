@@ -1,57 +1,26 @@
 <!DOCTYPE html>
 <html lang=en>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-		<link rel="stylesheet" href="https://newcss.net/lite.css">
-		<script src="https://unpkg.com/vue"></script>
-		<title>Singapore ThoughtWorks office roster lookup</title>
-		<style>#app { column-count: 3; }</style>
-	</head>
-	<body>
-		<div id="app">
-		<form>
-		<p>
-		<label>Date:<input name="date" v-model="date" required type="date"></label>
-		</p>
-		</form>
-		<ol>
-			<li v-for="item in items">
-			  ${ item }
-			</li>
-		  </ol>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="stylesheet" href="https://newcss.net/lite.css">
+<title>Office roster lookup</title>
+<style>#app { column-count: 3; }</style>
+</head>
+<body>
+<div id="app">
+<form>
+<p>
+<label>Date:<input name="date" value="{{ .Date }}" required type="date"></label>
+</p>
+<input type="submit">
+</form>
 
-		</div>
+<ol>
+{{- range .Names -}}
+<li>{{ . }}</li>
+{{- end}}
+</ol>
 
-		<script>
-			var app = new Vue({
-				el: '#app',
-				delimiters: ['${', '}'],
-				data: () => ({
-					date: new Date().toISOString().split('T')[0],
-					items: []
-				}),
-				watch: {
-					date: function(val) {
-						console.log(val)
-						this.getNames();
-					}
-				}, created: function () {
-					this.getNames()
-				},
-
-				methods: {
-					getNames(event) {
-						fetch('/?' + new URLSearchParams({
-							date: this.date.toString(),
-						}), {method: "GET"}).then((response) => {
-							return response.json(); }).then(items => {
-								this.items = items;
-							})
-					}
-				}
-			})
-		</script>
-
-	</body>
-	</html>
+</body>
+</html>

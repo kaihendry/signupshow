@@ -70,12 +70,11 @@ func main() {
 func (server *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	d := r.URL.Query().Get("date")
 	if len(d) != 10 {
-		server.views.ExecuteTemplate(w, "index.html", nil)
-		return
+		t := time.Now().Local()
+		d = t.Format("2006-01-02")
 	}
 
 	date, err := time.Parse(time.RFC3339[0:10], d)
-
 	if err != nil {
 		server.log.Printf("Could not parse date: %s", d)
 		http.Error(w, "Bad date", http.StatusBadRequest)
@@ -91,7 +90,13 @@ func (server *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	server.writeJSON(w, b)
+	server.views.ExecuteTemplate(w, "index.html", struct {
+		Date  string
+		Names []string
+	}{
+		Date:  d,
+		Names: b,
+	})
 
 }
 
