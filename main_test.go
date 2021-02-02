@@ -12,7 +12,7 @@ import (
 var specificdate, _ = time.Parse(time.RFC3339[0:10], "2021-02-07")
 
 func TestServer_takeNames(t *testing.T) {
-	xlFile, err := xlsx.OpenFile("tests/test.xlsx")
+	xlFile, err := xlsx.OpenFile("testdata/test.xlsx")
 	if err != nil {
 		t.Fatal(err)
 	}

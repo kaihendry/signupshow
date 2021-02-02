@@ -5,14 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <link rel="stylesheet" href="https://newcss.net/lite.css">
 <title>{{ .DayOfWeek }} office roster lookup</title>
-<style>#app { column-count: 3; }</style>
+<style>
+#controls { display: flex; }
+#app ol { column-count: 3; }
+</style>
 </head>
 <body>
 <div id="app">
+<div id="controls">
 <form>
-<p>
 <label>Date:<input name="date" value="{{ .Date }}" required type="date"></label>
-</p>
 <input type="submit">
 </form>
 
@@ -25,10 +27,7 @@
 <input type="hidden" name="date" value="{{ .Tomorrow }}">
 <input value="Tomorrow" type="submit">
 </form>
-
-
-
-
+</div>
 
 <ol>
 {{- range .Names -}}
