@@ -95,12 +95,14 @@ func (server *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		DayOfWeek string
 		Yesterday string
 		Tomorrow  string
+		Today     string
 		Names     []string
 	}{
 		Date:      d,
 		DayOfWeek: date.Weekday().String(),
 		Yesterday: date.AddDate(0, 0, -1).Format("2006-01-02"),
 		Tomorrow:  date.AddDate(0, 0, 1).Format("2006-01-02"),
+		Today:     time.Now().Local().Format("2006-01-02"),
 		Names:     b,
 	})
 

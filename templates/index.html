@@ -12,20 +12,24 @@
 </head>
 <body>
 <div id="app">
+<form>
+<label>Date:<input onchange="this.form.submit()" name="date" value="{{ .Date }}" required type="date"></label>
+</form>
+
 <div id="controls">
 <form>
-<label>Date:<input name="date" value="{{ .Date }}" required type="date"></label>
-<input type="submit">
+<input type="hidden" name="date" value="{{ .Yesterday }}">
+<input title="{{ .Yesterday }}" value="Yesterday" type="submit">
 </form>
 
 <form>
-<input type="hidden" name="date" value="{{ .Yesterday }}">
-<input value="Yesterday" type="submit">
+<input type="hidden" name="date" value="{{ .Today }}">
+<input title="{{ .Today }}" value="Today" type="submit">
 </form>
 
 <form>
 <input type="hidden" name="date" value="{{ .Tomorrow }}">
-<input value="Tomorrow" type="submit">
+<input title="{{ .Tomorrow }}" value="Tomorrow" type="submit">
 </form>
 </div>
 
